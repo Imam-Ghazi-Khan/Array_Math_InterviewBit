@@ -1,0 +1,24 @@
+public class PickFromBothSides {
+
+    public static void main(String[] args) {
+        int A[] = {5, -2, 3 , 1, 2};
+        int B[] = {1,2};
+        
+        System.out.println(solve(A,3));
+        System.out.println(solve(B,1));
+    }
+
+    public static int solve(int[] A, int B) {
+        int ans = 0, temp = 0;
+        for(int i = 0; i<B; i++){               //Calculating first B elements's sum
+            ans = ans + A[i];
+        }
+        temp = ans;
+        //Iterate from i=0 to B-1 and keep decreasing (B-i-1)th element froom starting and adding (last index-i)th element,until we get the sum of last B elements
+        for(int i = 0; i<B; i++){               
+            temp = temp - A[B-i-1] + A[A.length-i-1]; 
+            ans = Math.max(ans, temp);
+        }
+        return ans;
+    }
+}
