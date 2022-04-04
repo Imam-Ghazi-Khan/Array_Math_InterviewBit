@@ -1,3 +1,3 @@
 # Array_Math_InterviewBit
 
-Just Some Solution of InterviewBit problems for reference
+Just some solutions of problems in the bucket 'Array Math' in InterviewBit
