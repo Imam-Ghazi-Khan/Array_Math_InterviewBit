@@ -1,0 +1,36 @@
+import java.util.*;
+
+ class MinimumLightsToActivate {
+
+    public static void main(String args[]){
+        ArrayList<Integer> A = new ArrayList<Integer>(Arrays.asList(0,0,0,1,0));
+        System.out.println("output: "+solve(A,3));
+        ArrayList<Integer> B = new ArrayList<Integer>(Arrays.asList(0,0,1,1,1,0,0,1));
+        System.out.println("output: "+solve(B,3));
+    }
+
+    public static int solve(ArrayList<Integer> A, int B) {//ArrayList: 0=faulty lights,1 = working lights
+        if(A.size()<B){                            //is total number of positions less than the power of a light(number of positions it can lighten)?if yes then check the following:
+            if(A.indexOf(1)!=-1) return 1;         //is there a single workingn light in corridor?if yes,then whole  corridor can be  lighten up coz power of light,i.e.,the number of positions it can lighten is more than the given number of positions
+            return -1;                             //if there is no light,then corridor can't be lightened
+        }
+        int minDone = 0;                           //minDone = will store the position of the last light switched on
+        int maxDone = 0;                           //maxDone = will store last position where we can see the effect of the light
+
+        int currLight = B-1;                       //currLight = will traverse each positions and see if there lies a light ahead that can lighten it up(we start from rightmost light and go all the way back to ensure we get the rightmost light )
+        int count = 0;                             //count = will count the minimum number of lights that can lighten up the whole corridor
+
+        while(maxDone<A.size()-1){                 //while the effect of light hasn't reached the end of corridor
+            while(A.get(currLight)==0)             //starting from rightmost light that can lighten up the position that hasn't been lightened up yet
+            {
+                if(currLight==0 || minDone+1 == currLight) return -1;       //if we reach the first light or if we reach the last light that wasn't lightened up, without encountering even a single 1,then it's impossible to light up the whole corridor
+                currLight--;                       //we keep going back(left in the ArrayList) starting from rightmost light that can lighten current light
+            }
+            count++;                               //we reach here if we encounter a light,so we increment the count of minimum light required
+            minDone = currLight;                   //we update the last light found that has been switched on
+            maxDone = currLight+B-1;               //we jump just after the position where light effect reaches and we set currLight to again the rightmost light that can light the current position and traverse backwards to check if there is a single working light that can do that
+            currLight = Math.min(A.size()-1,maxDone+B);       //in order to ensure we don't reach out of the corridor's maximum lights(A.size is corridor's length /(or) number of positions)
+        }
+        return count;                               //returns the minimum light that can light up the whole corridor
+    }
+}
