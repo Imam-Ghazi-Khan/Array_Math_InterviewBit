@@ -1,0 +1,17 @@
+public class MinStepsInAnInfinteGrid {
+
+    public static void main(String args[]){
+        int A[] = {0,1,1};          //x-coordinates of the path
+        int B[] = {0,1,2};          //y-coordinates of the  path
+        System.out.println(coverPoints(A,B));
+    }
+
+    public static int coverPoints(int[] A, int[] B) {
+        int steps = 0;
+        for (int i = 0; i < A.length - 1; i++) {            
+            steps += Math.max(Math.abs(A[i] - A[i + 1]), Math.abs(B[i] - B[i + 1]));     //increment steps by the maximum of 'x-coordinates of the first two paths' and 'x=y-coordinates of the first two paths' 
+        //max steps in one direction ensures minimun steps taken to reach that path. Also since diagonal is allowed,we don't have to move both in x-coordinate and y-coordinate,hence max of x,y will suffice coz diagonal allows us to move in one move both  x,y in one go
+        }
+        return steps;
+    }
+}
