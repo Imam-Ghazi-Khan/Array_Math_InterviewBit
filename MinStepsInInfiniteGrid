@@ -8,7 +8,8 @@ public class MinStepsInInfinteGrid {
 
     public static int coverPoints(int[] A, int[] B) {
         int steps = 0;
-        for (int i = 0; i < A.length - 1; i++) {            
+        for (int i = 0; i < A.length - 1; i++) {
+            //Math.abs coz coordinates can be negative too.....
             steps += Math.max(Math.abs(A[i] - A[i + 1]), Math.abs(B[i] - B[i + 1]));     //increment steps by the maximum of 'x-coordinates of the first two paths' and 'x=y-coordinates of the first two paths' 
         //max steps in one direction ensures minimun steps taken to reach that path. Also since diagonal is allowed,we don't have to move both in x-coordinate and y-coordinate,hence max of x,y will suffice coz diagonal allows us to move in one move both  x,y in one go
         }
