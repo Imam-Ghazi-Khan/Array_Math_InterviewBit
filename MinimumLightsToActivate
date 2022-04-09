@@ -20,7 +20,7 @@ import java.util.*;
         int currLight = B-1;                       //currLight = will traverse each positions and see if there lies a light ahead that can lighten it up(we start from rightmost light and go all the way back to ensure we get the rightmost light )
         int count = 0;                             //count = will count the minimum number of lights that can lighten up the whole corridor
 
-        while(maxDone<A.size()-1){                 //while the effect of light hasn't reached the end of corridor
+        while(maxDone<A.size()-1){                 //while the effect of light hasn't reached the last light's position
             while(A.get(currLight)==0)             //starting from rightmost light that can lighten up the position that hasn't been lightened up yet
             {
                 if(currLight==0 || minDone+1 == currLight) return -1;       //if we reach the first light or if we reach the last light that wasn't lightened up, without encountering even a single 1,then it's impossible to light up the whole corridor
