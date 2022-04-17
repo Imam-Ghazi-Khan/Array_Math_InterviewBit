@@ -1,0 +1,45 @@
+import java.util.Arrays;
+
+public class Flip{
+
+    public static void main(String args[])
+    {
+        System.out.println(Arrays.toString(flip("010")));
+        System.out.println(Arrays.toString(flip("111")));
+    }
+
+    public static int[] flip(String A) {
+        int n = A.length();
+        int l=0,r=0,ltemp=0;
+        int count = 0,maxCount = Integer.MIN_VALUE;
+        boolean no0 = true;
+        for(int i = 0; i < n; i++)
+        {
+            if(A.charAt(i)=='0'){
+                no0 = false;
+                count++;
+            }
+            else if(A.charAt(i)=='1'){
+                count--;
+            }
+            if(count>maxCount)
+            {
+                maxCount = count;
+                l = ltemp;
+                r = i;
+            }
+            if(count<0)
+            {
+                count = 0;
+                ltemp = i+1;
+            }
+        }
+        if(no0){
+            int empty[] = {};
+            return empty;
+        }
+        int randl[] = new int[2];
+        randl[0] = l+1;randl[1] = r+1;
+        return randl;
+    }
+}
