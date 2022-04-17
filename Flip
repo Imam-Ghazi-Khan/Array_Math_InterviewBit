@@ -4,37 +4,37 @@ public class Flip{
 
     public static void main(String args[])
     {
-        System.out.println(Arrays.toString(flip("010")));
-        System.out.println(Arrays.toString(flip("111")));
+        System.out.println(Arrays.toString(flip("010")));           //[1,1]
+        System.out.println(Arrays.toString(flip("111")));           //[]
     }
-
-    public static int[] flip(String A) {
+                                              //we need to maximize 1s by flipping(i.e.,choosing a subarray from l to r and changing 0s to 1s and 1s to 0s
+    public static int[] flip(String A) {      //so we try to find subarray with maximum 0s and minimum 1s,so that maximum zeroes gets flipped to become 1,and minimum 1 becomes 0
         int n = A.length();
         int l=0,r=0,ltemp=0;
         int count = 0,maxCount = Integer.MIN_VALUE;
         boolean no0 = true;
         for(int i = 0; i < n; i++)
         {
-            if(A.charAt(i)=='0'){
-                no0 = false;
+            if(A.charAt(i)=='0'){            //if 0 found,increment count
+                no0 = false;                 //and record that 0 is found for line no. 37
                 count++;
             }
-            else if(A.charAt(i)=='1'){
+            else if(A.charAt(i)=='1'){      //if 1 found,decrement count
                 count--;
             }
-            if(count>maxCount)
+            if(count>maxCount)              //if count is greater than maxCount,we found a larger subarray with maximum 0s and minimum 1s
             {
                 maxCount = count;
-                l = ltemp;
-                r = i;
+                l = ltemp;                  //l becomes ltemp which stored first index of current subarray(check line 34)
+                r = i;                      //r becomes current index,coz this is the end index of current subarray(which can further be updated in next iteration if count still greater than maxCount
             }
-            if(count<0)
+            if(count<0)                                 //if count is negative,means we have found more 1s than 0s,so we need to start over and find next subarray
             {
                 count = 0;
-                ltemp = i+1;
+                ltemp = i+1;                            //since we starting over to record a new subarray,we store it's  first index in ltemp
             }
         }
-        if(no0){
+        if(no0){                                        //if no 0,then we need to return empty array coz no flip required on an array with only 1s
             int empty[] = {};
             return empty;
         }
