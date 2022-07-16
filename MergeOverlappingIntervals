@@ -22,7 +22,7 @@
         {
             Interval currentInterval = intervals.get(i);                                   //current traversal of intervals
                 
-            if(currentInterval.start<=lastResult.end)                                      //if current interval's start is greater than last interval's end,it means the intervals overlap
+            if(currentInterval.start<=lastResult.end)                                      //if current interval's start is greater than last result interval's end,it means the intervals overlap
             {   
                 lastResult.end=Math.max(lastResult.end,currentInterval.end);               //updating lastResult of intervals after merging it with current interval
             }
