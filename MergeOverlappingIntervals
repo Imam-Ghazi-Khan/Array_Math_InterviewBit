@@ -1,12 +1,12 @@
 
     public ArrayList<Interval> mergeOverlapppingIntervals(ArrayList<Interval> intervals) {
         
-        if(intervals.size()<=1)
+        if(intervals.size()<=1)                                                           //if there is only one intervals,return it
         {
             return intervals;
         }
         
-        Collections.sort(intervals, new Comparator<Interval>()
+        Collections.sort(intervals, new Comparator<Interval>()                              //Sorting according to intervals's start values so that comparing intervals is with the next element
         {
             public int compare(Interval i1,Interval i2)
             {
@@ -14,25 +14,25 @@
             }
         });
         
-        ArrayList<Interval> output=new ArrayList();
+        ArrayList<Interval> output=new ArrayList();                                         //output array
         
-        Interval lastResult = intervals.get(0);
-        
-        for(int i=1;i<intervals.size();i++)
+        Interval lastResult = intervals.get(0);                                            //last result of intervals after merging(or not merging) with next interval
+                                                                                           //initialized with first interval
+        for(int i=1;i<intervals.size();i++)                                                //loop  from second element coz of line no. 20
         {
-            Interval currentInterval = intervals.get(i);
-            
-            if(currentInterval.start<=lastResult.end)
+            Interval currentInterval = intervals.get(i);                                   //current traversal of intervals
+                
+            if(currentInterval.start<=lastResult.end)                                      //if current interval's start is greater than last interval's end,it means the intervals overlap
             {   
-                lastResult.end=Math.max(lastResult.end,currentInterval.end);
+                lastResult.end=Math.max(lastResult.end,currentInterval.end);               //updating lastResult of intervals after merging it with current interval
             }
-            else
+            else                                                                           //last result of interval and current interval are not overlapping
             {   
-                output.add(lastResult);
-                lastResult = currentInterval;
+                output.add(lastResult);                                                    //adding last result of interval to output array
+                lastResult = currentInterval;                                              //updating last result with current interval
             }
         }
         
-        output.add(new Interval(lastResult.start,lastResult.end)) ;
+        output.add(lastResult) ;                        
         return output;
     }
