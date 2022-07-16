@@ -1,0 +1,41 @@
+public ArrayList<Interval> mergeIntervals(ArrayList<Interval> intervals, Interval newInterval) {
+        
+        int n = intervals.size();
+        
+        ArrayList<Interval> arr = new ArrayList<Interval>();
+        if(newInterval.start>newInterval.end)
+        {
+            int temp = newInterval.start;
+            newInterval.start = newInterval.end;
+            newInterval.end = temp;
+        }
+        arr.add(newInterval);
+        for(int i = 0; i < n; i++)
+        {
+            Interval currentInterval = intervals.get(i);
+            Interval lastResultInterval = arr.remove(arr.size()-1);
+            
+            int a = currentInterval.start,b = currentInterval.end;
+            int c = lastResultInterval.start,d = lastResultInterval.end;
+            
+            if(b<c)
+            {
+                //not overlapped
+                arr.add(currentInterval);
+                arr.add(lastResultInterval);
+            }
+            else if(d<a)
+            {
+               //not overlapped 
+               arr.add(lastResultInterval);
+               arr.add(currentInterval);
+            }
+            else
+            {
+                //overlapped
+                Interval in = new Interval(Math.min(a,c),Math.max(b,d));
+                arr.add(in);
+            }
+        }
+        return arr;
+    }
