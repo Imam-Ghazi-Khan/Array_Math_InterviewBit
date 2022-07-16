@@ -6,7 +6,7 @@
             return intervals;
         }
         
-        Collections.sort(intervals, new Comparator<Interval>()                              //Sorting according to intervals's start values so that comparing intervals is with the next element
+        Collections.sort(intervals, new Comparator<Interval>()                              //Sorting according to intervals's start values so that it's easier to check overlapping with next intervals is with the next element
         {
             public int compare(Interval i1,Interval i2)
             {
